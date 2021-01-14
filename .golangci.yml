@@ -1,0 +1,230 @@
+run:
+  timeout: 1m # default 1m
+ 
+linters-settings:
+  errcheck:
+    check-type-assertions: true # default false
+    check-blank: false # default false
+    ignore: "fmt:.*" # default fmt:.*
+    exclude: "" # default ""
+  govet:
+    enable-all: true
+    settings:
+      shadow:
+        strict: true # default false
+  structcheck:
+    exported-fields: false # default false
+  unused:
+    check-exported: false # default false # TODO: enable after fixing false positives
+  varcheck:
+    exported-fields: false # default false # TODO: enable after fixing false positives
+ 
+  dupl:
+    threshold: 150 # default 150
+  errorlint:
+    errorf: true
+  exhaustive:
+    check-generated: false # default false
+    default-signifies-exhaustive: false # default false
+  funlen:
+    lines: 100 # default 60
+    statements: 50 # default 40
+  gocognit:
+    min-complexity: 20 # minimal code complexity to report, 30 by default (but we recommend 10-20)
+  goconst:
+    match-constant: true # default true
+    min-len: 3 # default 3
+    min-occurrences: 3 # default 3
+    numbers: true # default false
+    min: 3 # default 3
+    max: 3 # default 3
+    ignore-calls: true # default true
+  gocritic:
+    settings:
+      captLocal:
+        paramsOnly: false # whether to restrict checker to params only # default true
+      elseif:
+        skipBalanced: false # whether to skip balanced if-else pairs # default true
+      #hugeParam: # disabled by default
+      #  sizeThreshold: 80 # size in bytes that makes the warning trigger # default 80
+      #nestingReduce: # disabled by default
+      #  bodyWidth: 5 # min number of statements inside a branch to trigger a warning # default 5
+      #rangeExprCopy: # disabled by default
+      #  sizeThreshold: 512 # size in bytes that makes the warning trigger # default 512
+      #  skipTestFuncs: true # whether to check test functions # default true
+      #rangeValCopy: # disabled by default
+      #  sizeThreshold: 128 # size in bytes that makes the warning trigger # default 128
+      #  skipTestFuncs: true # whether to check test functions # default true
+      #ruleguard: # disabled by default
+      #  rules: "" # path to a gorules file # default ""
+      #truncateCmp: # disabled by default
+      #  skipArchDependent: true # whether to skip int/uint/uintptr types # default true
+      underef:
+        skipRecvDeref: false # whether to skip (*x).method() calls where x is a pointer receiver # default true
+      #unnamedResult: # disabled by default
+      #  checkExported: false # whether to check exported functions # default false
+  gocyclo:
+    min-complexity: 30 # default 30
+  godot:
+    scope: declarations # comments to be checked: `declarations` (default), `toplevel`, or `all`
+    capital: false # default false
+  golint:
+    min-confidence: 0 # default 0.8
+  gomnd:
+    settings:
+      mnd:
+        # the list of enabled checks, see https://github.com/tommy-muehle/go-mnd/#checks for description.
+        checks: argument,case,condition,operation,return,assign # default argument,case,condition,operation,return,assign
+        ignored-numbers: 0,1 # default 0,1
+        # ignored-files: "_test.go" # default "_test.go" # don't use this setting because of bug inside gomnd
+        ignored-functions: "time.Date" # default "time.Date"
+  gomodguard:
+    allowed:
+      modules: [] # default []
+      domains: [] # default []
+    blocked:
+      modules:
+        - github.com/golang/protobuf:
+            recommendations:
+              - google.golang.org/protobuf
+            reason: "see https://developers.google.com/protocol-buffers/docs/reference/go/faq#modules"
+        - github.com/satori/go.uuid:
+            recommendations:
+              - github.com/google/uuid
+            reason: "satori's package is not maintained"
+        - github.com/gofrs/uuid:
+            recommendations:
+              - github.com/google/uuid
+            reason: "see recommendation from dev-infra team: https://confluence.gtforge.com/x/gQI6Aw"
+      versions: [] # default []
+      local_replace_directives: true # default false
+  lll:
+    line-length: 120 # default 120
+  makezero:
+    always: false # default false
+  maligned:
+    suggest-new: true # default false
+  misspell:
+    locale: us
+    ignore-words: "" # default: ""
+  nakedret:
+    max-func-lines: 0 # default 30
+  nestif:
+    min-complexity: 4 # default 5
+  nolintlint:
+    allow-unused: false # default false
+    allow-leading-space: true # default true
+    allow-no-explanation: [funlen, gocognit, lll] # default []
+    require-explanation: true # default false
+    require-specific: true # default false
+  prealloc:
+    simple: false # default true
+    range-loops: true # default true
+    for-loops: false # default false
+  predeclared:
+    ignore: "" # comma-separated list of predeclared identifiers to not report on # default ""
+    q: false # include method names and field names (i.e., qualified names) in checks # default false
+  rowserrcheck:
+    packages:
+      - database/sql
+      - github.com/jmoiron/sqlx
+  testpackage:
+    skip-regexp: (export|internal)_test\.go # default (export|internal)_test\.go
+  unparam:
+    check-exported: true # default false
+ 
+linters:
+  disable-all: true
+  enable:
+    ## enabled by default
+    - deadcode
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - structcheck
+    - typecheck
+    - unused
+    - varcheck
+    ## disabled by default
+    - asciicheck
+    - bodyclose
+    - dupl
+    - errorlint
+    - exhaustive
+    - exhaustivestruct
+    - exportloopref
+    - funlen
+    - forbidigo
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - goimports
+    - golint
+    - gomnd
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - lll
+    - makezero
+    - maligned
+    - misspell
+    - nakedret
+    - nestif
+    - noctx
+    - nolintlint
+    - prealloc
+    - predeclared
+    - rowserrcheck
+    - scopelint
+    - sqlclosecheck
+    - stylecheck
+    - testpackage
+    - tparallel
+    - unconvert
+    - unparam
+    - whitespace
+    ## disabled
+    #- depguard # replaced with gomodguard
+    #- dogsled # is not used - Checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
+    #- gci # is not used - sorts imports
+    #- godox # is not used - complains about TODOs in comments
+    #- goerr113 # too strict - checks the errors handling expressions
+    #- gofmt # replaced with goimports
+    #- gofumpt # replaced with goimports, gofumports is not available yet
+    #- goheader # is not used - checks that each file has the licence at the beginning
+    #- interfacer # deprecated and has false positives
+    #- nlreturn # too strict - requires a new line before return and branch statements
+    #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
+    #- paralleltest # too many false positives
+    #- thelper # is not used - requires to use t.Helper()
+    #- wsl # too strict - enforces empty lines at the right places
+ 
+output:
+  uniq-by-line: false # default true
+ 
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-rules:
+    - source: "^//\\s*go:generate\\s"
+      linters: lll
+    - source: "(noinspection|TODO)"
+      linters: godot
+    - source: "//noinspection"
+      linters: gocritic
+    - source: "^\\s+if _, ok := err\\.\\([^.]+\\.InternalError\\); ok {"
+      linters: errorlint
+    - path: _test\.go
+      linters:
+        - bodyclose
+        - dupl
+        - exhaustivestruct
+        - funlen
+        - goconst
+        - noctx
