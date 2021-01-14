@@ -1,3 +1,9 @@
+## Golden config for golangci-lint v1.35.2
+#
+# This is the best config for golangci-lint based on my experience and opinion.
+# It is very strict, but not extremely strict.
+# Feel free to adopt and change it for your needs.
+
 run:
   timeout: 1m # default 1m
  
