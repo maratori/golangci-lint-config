@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.35.2
+## Golden config for golangci-lint v1.36.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -204,6 +204,7 @@ linters:
     #- gofmt # replaced with goimports
     #- gofumpt # replaced with goimports, gofumports is not available yet
     #- goheader # is not used - checks that each file has the licence at the beginning
+    #- ifshort # is not used - checks that your code uses short syntax for if-statements whenever possible
     #- interfacer # deprecated and has false positives
     #- nlreturn # too strict - requires a new line before return and branch statements
     #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
