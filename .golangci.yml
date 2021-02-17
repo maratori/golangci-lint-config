@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.36.0
+## Golden config for golangci-lint v1.37.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -24,7 +24,11 @@ linters-settings:
     check-exported: false # default false # TODO: enable after fixing false positives
   varcheck:
     exported-fields: false # default false # TODO: enable after fixing false positives
- 
+
+  cyclop:
+    max-complexity: 10 # the maximal code complexity to report # default 10
+    package-average: 0.0 # the maximal average package complexity. If it's higher than 0.0 (float) the check is enabled # default 0.0
+    skip-tests: false # should ignore tests # default false
   dupl:
     threshold: 150 # default 150
   errorlint:
@@ -32,6 +36,10 @@ linters-settings:
   exhaustive:
     check-generated: false # default false
     default-signifies-exhaustive: false # default false
+  forbidigo:
+    forbid: # forbid the following identifiers # default ^fmt\.Print(|f|ln)$
+      - ^fmt\.Print(|f|ln)$
+    exclude-godoc-examples: true # exclude godoc examples from forbidigo checks # default is true
   funlen:
     lines: 100 # default 60
     statements: 50 # default 40
@@ -73,7 +81,8 @@ linters-settings:
     min-complexity: 30 # default 30
   godot:
     scope: declarations # comments to be checked: `declarations` (default), `toplevel`, or `all`
-    capital: false # default false
+    exclude: [] # list of regexps for excluding particular comment lines from check # default []
+    capital: false # check that each sentence starts with a capital letter # default false
   golint:
     min-confidence: 0 # default 0.8
   gomnd:
@@ -130,6 +139,19 @@ linters-settings:
   predeclared:
     ignore: "" # comma-separated list of predeclared identifiers to not report on # default ""
     q: false # include method names and field names (i.e., qualified names) in checks # default false
+  revive:
+    ignore-generated-header: false # when set to false, ignores files with "GENERATED" header, similar to golint # default false
+    confidence: 0.3 # default failure confidence, this means that linting errors with less than X confidence will be ignored # default 0.8
+    severity: "warning" # minimal rule severity to fail {"error", "warning"} # default "warning"
+    # There is a list of default rules, but it can be redefined, see https://github.com/mgechev/revive#available-rules
+    #rules:
+    #  - name: "xxx"
+    #    arguments: []
+    #    severity: "xxx"
+    # allows to redefine rule severity (without changing default rules list)
+    #directives:
+    #  - name: "xxx"
+    #    severity: "xxx"
   rowserrcheck:
     packages:
       - database/sql
@@ -156,10 +178,12 @@ linters:
     ## disabled by default
     - asciicheck
     - bodyclose
+    #- cyclop # TODO: enable after enabling config https://github.com/golangci/golangci-lint/pull/1738#discussion_r578015058
     - dupl
+    - durationcheck
     - errorlint
     - exhaustive
-    - exhaustivestruct
+    #- exhaustivestruct # TODO: enable after fixing false positives
     - exportloopref
     - funlen
     - forbidigo
@@ -186,6 +210,7 @@ linters:
     - nolintlint
     - prealloc
     - predeclared
+    - revive
     - rowserrcheck
     - scopelint
     - sqlclosecheck
