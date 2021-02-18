@@ -178,7 +178,7 @@ linters:
     ## disabled by default
     - asciicheck
     - bodyclose
-    #- cyclop # TODO: enable after enabling config https://github.com/golangci/golangci-lint/pull/1738#discussion_r578015058
+    #- cyclop # TODO: enable after enabling config https://github.com/golangci/golangci-lint/pull/1743
     - dupl
     - durationcheck
     - errorlint
