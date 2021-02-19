@@ -183,7 +183,6 @@ linters:
     - durationcheck
     - errorlint
     - exhaustive
-    #- exhaustivestruct # TODO: enable after fixing false positives
     - exportloopref
     - funlen
     - forbidigo
@@ -203,7 +202,6 @@ linters:
     - lll
     - makezero
     - maligned
-    - misspell
     - nakedret
     - nestif
     - noctx
@@ -223,6 +221,7 @@ linters:
     ## disabled
     #- depguard # replaced with gomodguard
     #- dogsled # is not used - Checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
+    #- exhaustivestruct # too strict - finds structs that have uninitialized fields # TODO: maybe enable for some packages?
     #- gci # is not used - sorts imports
     #- godox # is not used - complains about TODOs in comments
     #- goerr113 # too strict - checks the errors handling expressions
@@ -231,10 +230,11 @@ linters:
     #- goheader # is not used - checks that each file has the licence at the beginning
     #- ifshort # is not used - checks that your code uses short syntax for if-statements whenever possible
     #- interfacer # deprecated and has false positives
+    #- misspell # useless - correct commonly misspelled English words... quickly
     #- nlreturn # too strict - requires a new line before return and branch statements
-    #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
     #- paralleltest # too many false positives
     #- thelper # is not used - requires to use t.Helper()
+    #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
     #- wsl # too strict - enforces empty lines at the right places
  
 output:
@@ -252,13 +252,10 @@ issues:
       linters: gocritic
     - source: "^\\s+if _, ok := err\\.\\([^.]+\\.InternalError\\); ok {"
       linters: errorlint
-    - source: "(http\\.Server|url\\.URL){"
-      linters: exhaustivestruct
     - path: "_test\\.go"
       linters:
         - bodyclose
         - dupl
-        - exhaustivestruct
         - funlen
         - goconst
         - noctx
