@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.38.0
+## Golden config for golangci-lint v1.39.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -73,6 +73,8 @@ linters-settings:
       #  skipTestFuncs: true # whether to check test functions # default true
       #ruleguard: # disabled by default
       #  rules: "" # path to a gorules file # default ""
+      #tooManyResultsChecker: # disabled by default
+      #  maxResults: 5 # maximum number of results # default 5
       #truncateCmp: # disabled by default
       #  skipArchDependent: true # whether to skip int/uint/uintptr types # default true
       underef:
@@ -95,6 +97,11 @@ linters-settings:
         ignored-numbers: 0,1 # default 0,1
         # ignored-files: "_test.go" # default "_test.go" # don't use this setting because of bug inside gomnd
         ignored-functions: "time.Date" # default "time.Date"
+  gomoddirectives:
+    replace-allow-list: [] # list of allowed `replace` directives # default []
+    replace-local: false # allow local `replace` directives # default false
+    exclude-forbidden: false # forbid the use of `exclude` directives # default false
+    retract-allow-no-explanation: false # allow to use `retract` directives without explanation # default false
   gomodguard:
     allowed:
       modules: [] # default []
@@ -141,10 +148,10 @@ linters-settings:
   predeclared:
     ignore: "" # comma-separated list of predeclared identifiers to not report on # default ""
     q: false # include method names and field names (i.e., qualified names) in checks # default false
-  revive:
-    ignore-generated-header: false # when set to false, ignores files with "GENERATED" header, similar to golint # default false
-    confidence: 0.3 # default failure confidence, this means that linting errors with less than X confidence will be ignored # default 0.8
-    severity: "warning" # minimal rule severity to fail {"error", "warning"} # default "warning"
+  revive: # default rules are ignored if any of following settings is defined
+    #ignore-generated-header: false # when set to false, ignores files with "GENERATED" header, similar to golint # default false
+    #confidence: 0.3 # default failure confidence, this means that linting errors with less than X confidence will be ignored # default 0.8
+    #severity: "warning" # minimal rule severity to fail {"error", "warning"} # default "warning"
     # There is a list of default rules, but it can be redefined, see https://github.com/mgechev/revive#available-rules
     #rules:
     #  - name: "xxx"
@@ -198,6 +205,7 @@ linters:
     - goimports
     - golint
     - gomnd
+    - gomoddirectives
     - gomodguard
     - goprintffuncname
     - gosec
@@ -212,7 +220,6 @@ linters:
     - predeclared
     - revive
     - rowserrcheck
-    - scopelint
     - sqlclosecheck
     - stylecheck
     - testpackage
@@ -239,6 +246,7 @@ linters:
     #- misspell # useless - correct commonly misspelled English words... quickly
     #- nlreturn # too strict - requires a new line before return and branch statements
     #- paralleltest # too many false positives
+    #- scopelint # deprecated
     #- thelper # is not used - requires to use t.Helper()
     #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
     #- wsl # too strict - enforces empty lines at the right places
@@ -265,3 +273,4 @@ issues:
         - funlen
         - goconst
         - noctx
+        - wrapcheck
