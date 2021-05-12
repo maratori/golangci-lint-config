@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.39.0
+## Golden config for golangci-lint v1.40.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -34,7 +34,12 @@ linters-settings:
   dupl:
     threshold: 150 # default 150
   errorlint:
-    errorf: true
+    # Check whether fmt.Errorf uses the %w verb for formatting errors. See the readme for caveats
+    errorf: true # default true
+    # Check for plain type assertions and type switches
+    asserts: true # default true
+    # Check for plain error comparisons
+    comparison: true # default true
   exhaustive:
     check-generated: false # default false
     default-signifies-exhaustive: false # default false
@@ -87,8 +92,6 @@ linters-settings:
     scope: declarations # comments to be checked: `declarations` (default), `toplevel`, or `all`
     exclude: [] # list of regexps for excluding particular comment lines from check # default []
     capital: false # check that each sentence starts with a capital letter # default false
-  golint:
-    min-confidence: 0 # default 0.8
   gomnd:
     settings:
       mnd:
@@ -148,6 +151,20 @@ linters-settings:
   predeclared:
     ignore: "" # comma-separated list of predeclared identifiers to not report on # default ""
     q: false # include method names and field names (i.e., qualified names) in checks # default false
+  promlinter:
+    # Promlinter cannot infer all metrics name in static analysis.
+    # Enable strict mode will also include the errors caused by failing to parse the args.
+    strict: false # default false
+    # Please refer to https://github.com/yeya24/promlinter#usage for detailed usage.
+    disabled-linters:
+    #  - "Help"
+    #  - "MetricUnits"
+    #  - "Counter"
+    #  - "HistogramSummaryReserved"
+    #  - "MetricTypeInName"
+    #  - "ReservedChars"
+    #  - "CamelCase"
+    #  - "lintUnitAbbreviations"
   revive: # default rules are ignored if any of following settings is defined
     #ignore-generated-header: false # when set to false, ignores files with "GENERATED" header, similar to golint # default false
     #confidence: 0.3 # default failure confidence, this means that linting errors with less than X confidence will be ignored # default 0.8
@@ -203,7 +220,6 @@ linters:
     - gocyclo
     - godot
     - goimports
-    - golint
     - gomnd
     - gomoddirectives
     - gomodguard
@@ -218,6 +234,7 @@ linters:
     - nolintlint
     - prealloc
     - predeclared
+    - promlinter
     - revive
     - rowserrcheck
     - sqlclosecheck
@@ -239,6 +256,7 @@ linters:
     #- gofmt # replaced with goimports
     #- gofumpt # replaced with goimports, gofumports is not available yet
     #- goheader # is not used - checks that each file has the licence at the beginning
+    #- golint # deprecated - revive is used instead
     #- ifshort # is not used - checks that your code uses short syntax for if-statements whenever possible
     #- importas # is not used - enforces consistent import aliases
     #- interfacer # deprecated and has false positives
@@ -247,6 +265,7 @@ linters:
     #- nlreturn # too strict - requires a new line before return and branch statements
     #- paralleltest # too many false positives
     #- scopelint # deprecated
+    #- tagliatelle # is not used - checks the struct tags
     #- thelper # is not used - requires to use t.Helper()
     #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
     #- wsl # too strict - enforces empty lines at the right places
