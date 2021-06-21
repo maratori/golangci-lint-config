@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.40.1
+## Golden config for golangci-lint v1.41.1
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -13,6 +13,9 @@ linters-settings:
     check-blank: false # default false
     ignore: "fmt:.*" # default fmt:.*
     exclude: "" # default ""
+  gosimple:
+    go: "1.16" # default 1.13
+    checks: [ "*" ] # https://staticcheck.io/docs/options#checks # default ["*"]
   govet:
     enable-all: true
     disable:
@@ -20,6 +23,9 @@ linters-settings:
     settings:
       shadow:
         strict: true # default false
+  staticcheck:
+    go: "1.16" # default 1.13
+    checks: [ "*" ] # https://staticcheck.io/docs/options#checks # default ["*"]
   structcheck:
     exported-fields: false # default false
   unused:
@@ -44,8 +50,8 @@ linters-settings:
     check-generated: false # default false
     default-signifies-exhaustive: false # default false
   forbidigo:
-    forbid: # forbid the following identifiers # default ^fmt\.Print(|f|ln)$
-      - ^fmt\.Print(|f|ln)$
+    forbid: # forbid the following identifiers # default ^(fmt\.Print(|f|ln)|print|println)$
+      - ^(fmt\.Print(|f|ln)|print|println)$
     exclude-godoc-examples: true # exclude godoc examples from forbidigo checks # default is true
   funlen:
     lines: 100 # default 60
@@ -60,6 +66,7 @@ linters-settings:
     min: 3 # default 3
     max: 3 # default 3
     ignore-calls: true # default true
+    ignore-tests: false # default false
   gocritic:
     settings:
       captLocal:
@@ -172,6 +179,7 @@ linters-settings:
     # There is a list of default rules, but it can be redefined, see https://github.com/mgechev/revive#available-rules
     #rules:
     #  - name: "xxx"
+    #    disabled: false
     #    arguments: []
     #    severity: "xxx"
     # allows to redefine rule severity (without changing default rules list)
@@ -182,6 +190,12 @@ linters-settings:
     packages:
       - database/sql
       - github.com/jmoiron/sqlx
+  stylecheck:
+    go: "1.16" # default 1.13
+    checks: [ "*" ] # https://staticcheck.io/docs/options#checks # default ["*"]
+    dot-import-whitelist: [] # https://staticcheck.io/docs/options#dot_import_whitelist  # default []
+    initialisms: [ "ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "QPS", "RAM", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "GID", "UID", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS" ] # https://staticcheck.io/docs/options#initialisms
+    http-status-code-whitelist: [ "200", "400", "404", "500" ] # https://staticcheck.io/docs/options#http_status_code_whitelist
   testpackage:
     skip-regexp: (export|internal)_test\.go # default (export|internal)_test\.go
   unparam:
