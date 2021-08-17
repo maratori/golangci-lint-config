@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.41.1
+## Golden config for golangci-lint v1.42.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -12,7 +12,7 @@ linters-settings:
     check-type-assertions: true # default false
     check-blank: false # default false
     ignore: "fmt:.*" # default fmt:.*
-    exclude: "" # default ""
+    exclude-functions: [] # see https://github.com/kisielk/errcheck#excluding-functions for details # default []
   gosimple:
     go: "1.16" # default 1.13
     checks: [ "*" ] # https://staticcheck.io/docs/options#checks # default ["*"]
@@ -47,8 +47,9 @@ linters-settings:
     # Check for plain error comparisons
     comparison: true # default true
   exhaustive:
-    check-generated: false # default false
-    default-signifies-exhaustive: false # default false
+    check-generated: false # indicates whether to check switch statements in generated Go source files # default false
+    default-signifies-exhaustive: false # if true, switch is considered exhaustive as long as a 'default' case is present # default false
+    ignore-pattern: "" # enum members matching regexp (including import path) do not require a case clause to satisfy exhaustiveness # default ""
   forbidigo:
     forbid: # forbid the following identifiers # default ^(fmt\.Print(|f|ln)|print|println)$
       - ^(fmt\.Print(|f|ln)|print|println)$
@@ -59,14 +60,14 @@ linters-settings:
   gocognit:
     min-complexity: 20 # minimal code complexity to report, 30 by default (but we recommend 10-20)
   goconst:
-    match-constant: true # default true
-    min-len: 3 # default 3
-    min-occurrences: 3 # default 3
-    numbers: true # default false
-    min: 3 # default 3
-    max: 3 # default 3
-    ignore-calls: true # default true
-    ignore-tests: false # default false
+    match-constant: true # look for existing constants matching the values # default true
+    min-len: 3 # minimal length of string constant # default 3
+    min-occurrences: 3 # minimum occurrences of constant string count to trigger issue # default 3
+    numbers: true # search also for duplicated numbers # default false
+    min: 3 # minimum value, only works with goconst.numbers # default 3
+    max: 3 # maximum value, only works with goconst.numbers # default 3
+    ignore-calls: true # ignore when constant is not used as function argument # default true
+    ignore-tests: false # ignore test files # default false
   gocritic:
     settings:
       captLocal:
@@ -176,6 +177,7 @@ linters-settings:
     #ignore-generated-header: false # when set to false, ignores files with "GENERATED" header, similar to golint # default false
     #confidence: 0.3 # default failure confidence, this means that linting errors with less than X confidence will be ignored # default 0.8
     #severity: "warning" # minimal rule severity to fail {"error", "warning"} # default "warning"
+    #enable-all-rules: false # default false
     # There is a list of default rules, but it can be redefined, see https://github.com/mgechev/revive#available-rules
     #rules:
     #  - name: "xxx"
@@ -200,6 +202,9 @@ linters-settings:
     skip-regexp: (export|internal)_test\.go # default (export|internal)_test\.go
   unparam:
     check-exported: true # default false
+  wrapcheck:
+    ignoreSigs: [] # specifies substrings of signatures to ignore. Overrides default https://github.com/tomarrell/wrapcheck#configuration # default []
+    ignorePackageGlobs: [] # see https://github.com/tomarrell/wrapcheck#configuration # default []
  
 linters:
   disable-all: true
@@ -221,6 +226,7 @@ linters:
     - cyclop
     - dupl
     - durationcheck
+    - errname
     - errorlint
     - exhaustive
     - exportloopref
