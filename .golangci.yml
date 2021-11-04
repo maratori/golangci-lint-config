@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.42.1
+## Golden config for golangci-lint v1.43.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -146,6 +146,13 @@ linters-settings:
     max-func-lines: 0 # default 30
   nestif:
     min-complexity: 4 # default 5
+  nilnil:
+    checked-types: # default [ptr, func, iface, map, chan]
+      - ptr
+      - func
+      - iface
+      - map
+      - chan
   nolintlint:
     allow-unused: false # default false
     allow-leading-space: true # default true
@@ -198,12 +205,15 @@ linters-settings:
     dot-import-whitelist: [] # https://staticcheck.io/docs/options#dot_import_whitelist  # default []
     initialisms: [ "ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "QPS", "RAM", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "GID", "UID", "UUID", "URI", "URL", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS" ] # https://staticcheck.io/docs/options#initialisms
     http-status-code-whitelist: [ "200", "400", "404", "500" ] # https://staticcheck.io/docs/options#http_status_code_whitelist
+  tenv:
+    all: true # check all functions in _test.go, not only test functions # default false
   testpackage:
     skip-regexp: (export|internal)_test\.go # default (export|internal)_test\.go
   unparam:
     check-exported: true # default false
   wrapcheck:
     ignoreSigs: [] # specifies substrings of signatures to ignore. Overrides default https://github.com/tomarrell/wrapcheck#configuration # default []
+    ignoreSigRegexps: [] # this is similar to the ignoreSigs, but gives slightly more flexibility # default []
     ignorePackageGlobs: [] # see https://github.com/tomarrell/wrapcheck#configuration # default []
  
 linters:
@@ -222,7 +232,9 @@ linters:
     - varcheck
     ## disabled by default
     - asciicheck
+    - bidichk
     - bodyclose
+    - contextcheck
     - cyclop
     - dupl
     - durationcheck
@@ -250,6 +262,7 @@ linters:
     - nakedret
     - nestif
     - nilerr
+    - nilnil
     - noctx
     - nolintlint
     - prealloc
@@ -259,6 +272,7 @@ linters:
     - rowserrcheck
     - sqlclosecheck
     - stylecheck
+    - tenv
     - testpackage
     - tparallel
     - unconvert
@@ -280,6 +294,7 @@ linters:
     #- ifshort # is not used - checks that your code uses short syntax for if-statements whenever possible
     #- importas # is not used - enforces consistent import aliases
     #- interfacer # deprecated and has false positives
+    #- ireturn # good, but too strict - accept interfaces, return concrete types
     #- maligned # deprecated
     #- misspell # useless - correct commonly misspelled English words... quickly
     #- nlreturn # too strict - requires a new line before return and branch statements
@@ -288,6 +303,7 @@ linters:
     #- tagliatelle # is not used - checks the struct tags
     #- thelper # is not used - requires to use t.Helper()
     #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
+    #- varnamelen # great idea, but too many false positives - checking length of variable's name matches its usage scope
     #- wsl # too strict - enforces empty lines at the right places
  
 output:
