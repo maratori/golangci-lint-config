@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.44.0
+## Golden config for golangci-lint v1.44.2
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -205,6 +205,7 @@ linters-settings:
     #  - "CamelCase"
     #  - "lintUnitAbbreviations"
   revive: # default rules are ignored if any of following settings is defined
+    #max-open-files: 0 # maximum number of open files at the same time # defaults 0 - unlimited
     #ignore-generated-header: false # when set to false, ignores files with "GENERATED" header, similar to golint # default false
     #confidence: 0.3 # default failure confidence, this means that linting errors with less than X confidence will be ignored # default 0.8
     #severity: "warning" # minimal rule severity to fail {"error", "warning"} # default "warning"
