@@ -9,6 +9,7 @@ run:
  
 linters-settings:
   errcheck:
+    disable-default-exclusions: false # disable built-in exclude list # default: false
     check-type-assertions: true # default false
     check-blank: false # default false
     ignore: "fmt:.*" # default fmt:.*
