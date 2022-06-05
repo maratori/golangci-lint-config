@@ -62,6 +62,21 @@ linters-settings:
         # Default: true
         skipRecvDeref: false
 
+  gomnd:
+    # List of function patterns to exclude from analysis.
+    # Values always ignored: `time.Time`
+    # Default: []
+    ignored-functions:
+      - os.Chmod
+      - os.Mkdir
+      - os.MkdirAll
+      - os.OpenFile
+      - os.WriteFile
+      - strconv.FormatFloat
+      - strconv.FormatInt
+      - strconv.ParseFloat
+      - strconv.ParseInt
+
   gomodguard:
     blocked:
       # List of blocked modules.
