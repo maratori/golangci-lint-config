@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.45.2
+## Golden config for golangci-lint v1.46.2
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -266,6 +266,7 @@ linters:
     - durationcheck # check for two durations multiplied together
     - errname # Checks that sentinel errors are prefixed with the Err and error types are suffixed with the Error.
     - errorlint # errorlint is a linter for that can be used to find code that will cause problems with the error wrapping scheme introduced in Go 1.13.
+    - execinquery # execinquery is a linter about query string checker in Query function which reads your Go src files and warning it finds
     - exhaustive # check exhaustiveness of enum switch statements
     - exportloopref # checks for pointers to enclosing loop variables
     - forbidigo # Forbids identifiers
@@ -291,6 +292,8 @@ linters:
     - nilnil # Checks that there is no simultaneous return of nil error and an invalid value.
     - noctx # noctx finds sending http request without context.Context
     - nolintlint # Reports ill-formed or insufficient nolint directives
+    - nonamedreturns # Reports all named returns
+    - nosprintfhostport # Checks for misuse of Sprintf to construct a host with port in a URL.
     - prealloc # Finds slice declarations that could potentially be preallocated
     - predeclared # find code that shadows one of Go's predeclared identifiers
     - promlinter # Check Prometheus metrics naming via promlint
@@ -309,9 +312,10 @@ linters:
     #- containedctx # containedctx is a linter that detects struct contained context.Context field
     #- decorder # check declaration order and count of types, constants, variables and functions
     #- depguard # [replaced by gomodguard] Go linter that checks if package imports are in a list of acceptable packages
-    #- dogsled # Checks assignments with too many blank identifiers (e.g. x, , , _, := f())
+    #- dogsled # Checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
     #- errchkjson # Checks types passed to the json encoding functions. Reports unsupported types and optionally reports occasions, where the check for the returned error can be omitted.
     #- exhaustivestruct # [deprecated, replaced by exhaustruct] Checks if all struct's fields are initialized
+    #- exhaustruct # [can be enabled, but have to be configured] Checks if all structure fields are initialized
     #- forcetypeassert # [replaced by errcheck] finds forced type assertions
     #- gci # Gci controls golang package import order and makes it always deterministic.
     #- godox # Tool for detection of FIXME, TODO and other comment keywords
