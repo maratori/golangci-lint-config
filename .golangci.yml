@@ -246,96 +246,96 @@ linters:
   disable-all: true
   enable:
     ## enabled by default
-    - deadcode
-    - errcheck
-    - gosimple
-    - govet
-    - ineffassign
-    - staticcheck
-    - structcheck
-    - typecheck
-    - unused
-    - varcheck
+    - deadcode # Finds unused code
+    - errcheck # Errcheck is a program for checking for unchecked errors in go programs. These unchecked errors can be critical bugs in some cases
+    - gosimple # Linter for Go source code that specializes in simplifying a code
+    - govet # Vet examines Go source code and reports suspicious constructs, such as Printf calls whose arguments do not align with the format string
+    - ineffassign # Detects when assignments to existing variables are not used
+    - staticcheck # Staticcheck is a go vet on steroids, applying a ton of static analysis checks
+    - structcheck # Finds unused struct fields
+    - typecheck # Like the front-end of a Go compiler, parses and type-checks Go code
+    - unused # Checks Go code for unused constants, variables, functions and types
+    - varcheck # Finds unused global variables and constants
     ## disabled by default
-    - asciicheck
-    - bidichk
-    - bodyclose
-    - contextcheck
-    - cyclop
-    - dupl
-    - durationcheck
-    - errname
-    - errorlint
-    - exhaustive
-    - exportloopref
-    - funlen
-    - forbidigo
-    - gochecknoglobals
-    - gochecknoinits
-    - gocognit
-    - goconst
-    - gocritic
-    - gocyclo
-    - godot
-    - goimports
-    - gomnd
-    - gomoddirectives
-    - gomodguard
-    - goprintffuncname
-    - gosec
-    - lll
-    - makezero
-    - nakedret
-    - nestif
-    - nilerr
-    - nilnil
-    - noctx
-    - nolintlint
-    - prealloc
-    - predeclared
-    - promlinter
-    - revive
-    - rowserrcheck
-    - sqlclosecheck
-    - stylecheck
-    - tenv
-    - testpackage
-    - tparallel
-    - unconvert
-    - unparam
-    - wastedassign
-    - whitespace
+    - asciicheck # Simple linter to check that your code does not contain non-ASCII identifiers
+    - bidichk # Checks for dangerous unicode character sequences
+    - bodyclose # checks whether HTTP response body is closed successfully
+    - contextcheck # check the function whether use a non-inherited context
+    - cyclop # checks function and package cyclomatic complexity
+    - dupl # Tool for code clone detection
+    - durationcheck # check for two durations multiplied together
+    - errname # Checks that sentinel errors are prefixed with the Err and error types are suffixed with the Error.
+    - errorlint # errorlint is a linter for that can be used to find code that will cause problems with the error wrapping scheme introduced in Go 1.13.
+    - exhaustive # check exhaustiveness of enum switch statements
+    - exportloopref # checks for pointers to enclosing loop variables
+    - funlen # Tool for detection of long functions
+    - forbidigo # Forbids identifiers
+    - gochecknoglobals # check that no global variables exist
+    - gochecknoinits # Checks that no init functions are present in Go code
+    - gocognit # Computes and checks the cognitive complexity of functions
+    - goconst # Finds repeated strings that could be replaced by a constant
+    - gocritic # Provides diagnostics that check for bugs, performance and style issues.
+    - gocyclo # Computes and checks the cyclomatic complexity of functions
+    - godot # Check if comments end in a period
+    - goimports # In addition to fixing imports, goimports also formats your code in the same style as gofmt.
+    - gomnd # An analyzer to detect magic numbers.
+    - gomoddirectives # Manage the use of 'replace', 'retract', and 'excludes' directives in go.mod.
+    - gomodguard # Allow and block list linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations.
+    - goprintffuncname # Checks that printf-like functions are named with f at the end
+    - gosec # Inspects source code for security problems
+    - lll # Reports long lines
+    - makezero # Finds slice declarations with non-zero initial length
+    - nakedret # Finds naked returns in functions greater than a specified function length
+    - nestif # Reports deeply nested if statements
+    - nilerr # Finds the code that returns nil even if it checks that the error is not nil.
+    - nilnil # Checks that there is no simultaneous return of nil error and an invalid value.
+    - noctx # noctx finds sending http request without context.Context
+    - nolintlint # Reports ill-formed or insufficient nolint directives
+    - prealloc # Finds slice declarations that could potentially be preallocated
+    - predeclared # find code that shadows one of Go's predeclared identifiers
+    - promlinter # Check Prometheus metrics naming via promlint
+    - revive # Fast, configurable, extensible, flexible, and beautiful linter for Go. Drop-in replacement of golint.
+    - rowserrcheck # checks whether Err of rows is checked successfully
+    - sqlclosecheck # Checks that sql.Rows and sql.Stmt are closed.
+    - stylecheck # Stylecheck is a replacement for golint
+    - tenv # tenv is analyzer that detects using os.Setenv instead of t.Setenv since Go1.17
+    - testpackage # linter that makes you use a separate _test package
+    - tparallel # tparallel detects inappropriate usage of t.Parallel() method in your Go test codes
+    - unconvert # Remove unnecessary type conversions
+    - unparam # Reports unused function parameters
+    - wastedassign # wastedassign finds wasted assignment statements.
+    - whitespace # Tool for detection of leading and trailing whitespace
     ## disabled
-    #- containedctx # is not used - linter that detects struct contained context.Context field
-    #- decorder # is not used - a declaration order and number linter for golang
-    #- depguard # replaced with gomodguard
-    #- dogsled # is not used - сhecks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
-    #- errchkjson # is not used - checks types that are json encoded - reports unsupported types and unnecessary error checks
-    #- exhaustivestruct # too strict - finds structs that have uninitialized fields # TODO: maybe enable for some packages?
-    #- forcetypeassert # errcheck is used instead
-    #- gci # is not used - sorts imports
-    #- godox # is not used - complains about TODOs in comments
-    #- goerr113 # too strict - checks the errors handling expressions
-    #- gofmt # replaced with goimports
-    #- gofumpt # replaced with goimports, gofumports is not available yet
-    #- goheader # is not used - checks that each file has the licence at the beginning
-    #- golint # deprecated - revive is used instead
-    #- grouper # is not used - analyze expression groups, require 'import' declaration groups
-    #- ifshort # is not used - checks that your code uses short syntax for if-statements whenever possible
-    #- importas # is not used - enforces consistent import aliases
-    #- interfacer # deprecated and has false positives
-    #- ireturn # good, but too strict - accept interfaces, return concrete types
-    #- maintidx # is not used - measures the maintainability index of each function
-    #- maligned # deprecated
-    #- misspell # useless - correct commonly misspelled English words... quickly
-    #- nlreturn # too strict - requires a new line before return and branch statements
-    #- paralleltest # too many false positives
-    #- scopelint # deprecated
-    #- tagliatelle # is not used - checks the struct tags
-    #- thelper # is not used - requires to use t.Helper()
-    #- wrapcheck # too strict - requires wrapping errors from external packages (even from the same repo) and interfaces
-    #- varnamelen # great idea, but too many false positives - checking length of variable's name matches its usage scope
-    #- wsl # too strict - enforces empty lines at the right places
+    #- containedctx # containedctx is a linter that detects struct contained context.Context field
+    #- decorder # check declaration order and count of types, constants, variables and functions
+    #- depguard # [replaced by gomodguard] Go linter that checks if package imports are in a list of acceptable packages
+    #- dogsled # Checks assignments with too many blank identifiers (e.g. x, , , _, := f())
+    #- errchkjson # Checks types passed to the json encoding functions. Reports unsupported types and optionally reports occasions, where the check for the returned error can be omitted.
+    #- exhaustivestruct # [deprecated, replaced by exhaustruct] Checks if all struct's fields are initialized
+    #- forcetypeassert # [replaced by errcheck] finds forced type assertions
+    #- gci # Gci controls golang package import order and makes it always deterministic.
+    #- godox # Tool for detection of FIXME, TODO and other comment keywords
+    #- goerr113 # [too strict] Golang linter to check the errors handling expressions
+    #- gofmt # [replaced by goimports] Gofmt checks whether code was gofmt-ed. By default this tool runs with -s option to check for code simplification
+    #- gofumpt # [replaced by goimports, gofumports is not available yet] Gofumpt checks whether code was gofumpt-ed.
+    #- goheader # Checks is file header matches to pattern
+    #- golint # [deprecated, replaced by revive] Golint differs from gofmt. Gofmt reformats Go source code, whereas golint prints out style mistakes
+    #- grouper # An analyzer to analyze expression groups.
+    #- ifshort # Checks that your code uses short syntax for if-statements whenever possible
+    #- importas # Enforces consistent import aliases
+    #- interfacer # [deprecated] Linter that suggests narrower interface types
+    #- ireturn # [good, but too strict] Accept Interfaces, Return Concrete Types
+    #- maintidx # maintidx measures the maintainability index of each function.
+    #- maligned # [deprecated, replaced by govet fieldalignment] Tool to detect Go structs that would take less memory if their fields were sorted
+    #- misspell # [useless] Finds commonly misspelled English words in comments
+    #- nlreturn # [too strict and mostly code is not more readable] nlreturn checks for a new line before return and branch statements to increase code clarity
+    #- paralleltest # [too many false positives] paralleltest detects missing usage of t.Parallel() method in your Go test
+    #- scopelint # [deprecated, replaced by exportloopref] Scopelint checks for unpinned variables in go programs
+    #- tagliatelle # Checks the struct tags.
+    #- thelper # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
+    #- wrapcheck # [too strict] Checks that errors returned from external packages are wrapped
+    #- varnamelen # [great idea, but too many false positives] checks that the length of a variable's name matches its scope
+    #- wsl # [too strict and mostly code is not more readable] Whitespace Linter - Forces you to use empty lines!
  
 output:
   uniq-by-line: false # default true
