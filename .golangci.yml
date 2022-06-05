@@ -207,6 +207,7 @@ linters:
     #- ireturn # Accept Interfaces, Return Concrete Types
     #- prealloc # [premature optimization, but can be used in some cases] Finds slice declarations that could potentially be preallocated
     #- varnamelen # [great idea, but too many false positives] checks that the length of a variable's name matches its scope
+    #- wrapcheck # Checks that errors returned from external packages are wrapped
     ## disabled
     #- containedctx # containedctx is a linter that detects struct contained context.Context field
     #- depguard # [replaced by gomodguard] Go linter that checks if package imports are in a list of acceptable packages
@@ -227,7 +228,6 @@ linters:
     #- paralleltest # [too many false positives] paralleltest detects missing usage of t.Parallel() method in your Go test
     #- tagliatelle # Checks the struct tags.
     #- thelper # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
-    #- wrapcheck # [too strict] Checks that errors returned from external packages are wrapped
     #- wsl # [too strict and mostly code is not more readable] Whitespace Linter - Forces you to use empty lines!
     ## deprecated
     #- exhaustivestruct # [deprecated, replaced by exhaustruct] Checks if all struct's fields are initialized
@@ -253,5 +253,6 @@ issues:
         - dupl
         - funlen
         - goconst
+        - gosec
         - noctx
         - wrapcheck
