@@ -268,8 +268,8 @@ linters:
     - errorlint # errorlint is a linter for that can be used to find code that will cause problems with the error wrapping scheme introduced in Go 1.13.
     - exhaustive # check exhaustiveness of enum switch statements
     - exportloopref # checks for pointers to enclosing loop variables
-    - funlen # Tool for detection of long functions
     - forbidigo # Forbids identifiers
+    - funlen # Tool for detection of long functions
     - gochecknoglobals # check that no global variables exist
     - gochecknoinits # Checks that no init functions are present in Go code
     - gocognit # Computes and checks the cognitive complexity of functions
@@ -333,8 +333,8 @@ linters:
     #- scopelint # [deprecated, replaced by exportloopref] Scopelint checks for unpinned variables in go programs
     #- tagliatelle # Checks the struct tags.
     #- thelper # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
-    #- wrapcheck # [too strict] Checks that errors returned from external packages are wrapped
     #- varnamelen # [great idea, but too many false positives] checks that the length of a variable's name matches its scope
+    #- wrapcheck # [too strict] Checks that errors returned from external packages are wrapped
     #- wsl # [too strict and mostly code is not more readable] Whitespace Linter - Forces you to use empty lines!
  
 output:
