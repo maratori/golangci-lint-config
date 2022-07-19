@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.46.2
+## Golden config for golangci-lint v1.47.1
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -165,6 +165,7 @@ linters:
     - unused # Checks Go code for unused constants, variables, functions and types
     - varcheck # Finds unused global variables and constants
     ## disabled by default
+    - asasalint # Check for pass []any as any in variadic func(...any)
     - asciicheck # Simple linter to check that your code does not contain non-ASCII identifiers
     - bidichk # Checks for dangerous unicode character sequences
     - bodyclose # checks whether HTTP response body is closed successfully
@@ -240,6 +241,7 @@ linters:
     #- maintidx # maintidx measures the maintainability index of each function.
     #- misspell # [useless] Finds commonly misspelled English words in comments
     #- nlreturn # [too strict and mostly code is not more readable] nlreturn checks for a new line before return and branch statements to increase code clarity
+    #- nosnakecase Detects snake case of variable naming and function name. # TODO: maybe enable after https://github.com/sivchari/nosnakecase/issues/14
     #- paralleltest # [too many false positives] paralleltest detects missing usage of t.Parallel() method in your Go test
     #- tagliatelle # Checks the struct tags.
     #- thelper # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
