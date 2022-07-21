@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.47.1
+## Golden config for golangci-lint v1.47.2
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -241,7 +241,7 @@ linters:
     #- maintidx # maintidx measures the maintainability index of each function.
     #- misspell # [useless] Finds commonly misspelled English words in comments
     #- nlreturn # [too strict and mostly code is not more readable] nlreturn checks for a new line before return and branch statements to increase code clarity
-    #- nosnakecase Detects snake case of variable naming and function name. # TODO: maybe enable after https://github.com/sivchari/nosnakecase/issues/14
+    #- nosnakecase # Detects snake case of variable naming and function name. # TODO: maybe enable after https://github.com/sivchari/nosnakecase/issues/14
     #- paralleltest # [too many false positives] paralleltest detects missing usage of t.Parallel() method in your Go test
     #- tagliatelle # Checks the struct tags.
     #- thelper # thelper detects golang test helpers without t.Helper() call and checks the consistency of test helpers
