@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.47.2
+## Golden config for golangci-lint v1.47.3
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -8,11 +8,6 @@ run:
   # Timeout for analysis, e.g. 30s, 5m.
   # Default: 1m
   timeout: 3m
-
-  # Define the Go version limit.
-  # Mainly related to generics support in go1.18.
-  # Default: use Go version from the go.mod file, fallback on the env var `GOVERSION`, fallback on 1.17
-  go: "1.17" # TODO: change to 1.18 when most linters support it, see https://github.com/golangci/golangci-lint/issues/2649
 
 
 # This file contains only configs which differ from defaults.
