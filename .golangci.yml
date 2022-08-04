@@ -1,4 +1,4 @@
-## Golden config for golangci-lint v1.47.3
+## Golden config for golangci-lint v1.48.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -209,6 +209,7 @@ linters:
     - tparallel # tparallel detects inappropriate usage of t.Parallel() method in your Go test codes
     - unconvert # Remove unnecessary type conversions
     - unparam # Reports unused function parameters
+    - usestdlibvars # detect the possibility to use variables/constants from the Go standard library
     - wastedassign # wastedassign finds wasted assignment statements.
     - whitespace # Tool for detection of leading and trailing whitespace
     ## you may want to enable
@@ -231,7 +232,6 @@ linters:
     #- gofmt # [replaced by goimports] Gofmt checks whether code was gofmt-ed. By default this tool runs with -s option to check for code simplification
     #- gofumpt # [replaced by goimports, gofumports is not available yet] Gofumpt checks whether code was gofumpt-ed.
     #- grouper # An analyzer to analyze expression groups.
-    #- ifshort # Checks that your code uses short syntax for if-statements whenever possible
     #- importas # Enforces consistent import aliases
     #- maintidx # maintidx measures the maintainability index of each function.
     #- misspell # [useless] Finds commonly misspelled English words in comments
@@ -244,6 +244,7 @@ linters:
     ## deprecated
     #- exhaustivestruct # [deprecated, replaced by exhaustruct] Checks if all struct's fields are initialized
     #- golint # [deprecated, replaced by revive] Golint differs from gofmt. Gofmt reformats Go source code, whereas golint prints out style mistakes
+    #- ifshort # [deprecated, by the owner] Checks that your code uses short syntax for if-statements whenever possible
     #- interfacer # [deprecated] Linter that suggests narrower interface types
     #- maligned # [deprecated, replaced by govet fieldalignment] Tool to detect Go structs that would take less memory if their fields were sorted
     #- scopelint # [deprecated, replaced by exportloopref] Scopelint checks for unpinned variables in go programs
