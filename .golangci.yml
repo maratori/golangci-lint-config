@@ -98,7 +98,7 @@ linters-settings:
         - github.com/gofrs/uuid:
             recommendations:
               - github.com/google/uuid
-            reason: "see recommendation from dev-infra team: https://confluence.gtforge.com/x/gQI6Aw"
+            reason: "gofrs' package is not go module"
 
   govet:
     # Enable all analyzers.
