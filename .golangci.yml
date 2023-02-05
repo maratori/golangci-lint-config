@@ -1,6 +1,6 @@
 # This code is licensed under the terms of the MIT license.
 
-## Golden config for golangci-lint v1.51.0
+## Golden config for golangci-lint v1.51.1
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
