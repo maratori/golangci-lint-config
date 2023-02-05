@@ -57,6 +57,7 @@ linters-settings:
       - "^github.com/prometheus/client_golang/.+Opts$"
       - "^github.com/spf13/cobra.Command$"
       - "^github.com/spf13/cobra.CompletionOptions$"
+      - "^golang.org/x/tools/go/analysis.Analyzer$"
       - "^google.golang.org/protobuf/.+Options$"
       - "^gopkg.in/yaml.v3.Node$"
 
