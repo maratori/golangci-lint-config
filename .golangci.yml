@@ -50,6 +50,7 @@ linters-settings:
       - "^net/http.Transport$"
       - "^net/url.URL$"
       - "^os/exec.Cmd$"
+      - "^reflect.StructField$"
       # public libs
       - "^github.com/Shopify/sarama.Config$"
       - "^github.com/Shopify/sarama.ProducerMessage$"
