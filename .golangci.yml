@@ -1,6 +1,6 @@
 # This code is licensed under the terms of the MIT license.
 
-## Golden config for golangci-lint v1.51.2
+## Golden config for golangci-lint v1.52.0
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -296,14 +296,10 @@ issues:
   max-same-issues: 50
 
   exclude-rules:
-    - source: "^//\\s*go:generate\\s"
-      linters: [ lll ]
     - source: "(noinspection|TODO)"
       linters: [ godot ]
     - source: "//noinspection"
       linters: [ gocritic ]
-    - source: "^\\s+if _, ok := err\\.\\([^.]+\\.InternalError\\); ok {"
-      linters: [ errorlint ]
     - path: "_test\\.go"
       linters:
         - bodyclose
