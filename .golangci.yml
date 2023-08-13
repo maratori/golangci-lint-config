@@ -1,7 +1,7 @@
 # This code is licensed under the terms of the MIT license https://opensource.org/license/mit
 # Copyright (c) 2021 Marat Reymers
 
-## Golden config for golangci-lint v1.53.3
+## Golden config for golangci-lint v1.54.1
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
@@ -75,6 +75,9 @@ linters-settings:
     # If lower than 0, disable the check.
     # Default: 40
     statements: 50
+    # Ignore comments when counting lines.
+    # Default false
+    ignore-comments: true
 
   gocognit:
     # Minimal code complexity to report.
