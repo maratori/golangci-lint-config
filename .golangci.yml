@@ -185,6 +185,22 @@ linters-settings:
     packages:
       - github.com/jmoiron/sqlx
 
+  sloglint:
+    # Enforce not using global loggers.
+    # Values:
+    # - "": disabled
+    # - "all": report all global loggers
+    # - "default": report only the default slog logger
+    # Default: ""
+    no-global: "all"
+    # Enforce using methods that accept a context.
+    # Values:
+    # - "": disabled
+    # - "all": report all contextless calls
+    # - "scope": report only if a context exists in the scope of the outermost function
+    # Default: ""
+    context: "scope"
+
   tenv:
     # The option `all` will run against whole test files (`_test.go`) regardless of method/function signatures.
     # Otherwise, only methods that take `*testing.T`, `*testing.B`, and `testing.TB` as arguments are checked.
