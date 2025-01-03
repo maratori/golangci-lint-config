@@ -1,11 +1,14 @@
-# This code is licensed under the terms of the MIT license https://opensource.org/license/mit
-# Copyright (c) 2021-2025 Marat Reymers
+# This file is licensed under the terms of the MIT license https://opensource.org/license/mit
+# Copyright (c) 2021-2025 Marat Reimers
 
-## Golden config for golangci-lint v1.63.3
+## Golden config for golangci-lint v1.63.4
 #
 # This is the best config for golangci-lint based on my experience and opinion.
 # It is very strict, but not extremely strict.
-# Feel free to adapt and change it for your needs.
+# Feel free to adapt it to suit your needs.
+# If this config helps you, please consider keeping a link to this repo (see the next comment).
+
+# Based on https://github.com/maratori/golangci-lint-config
 
 run:
   # Timeout for analysis, e.g. 30s, 5m.
@@ -24,6 +27,36 @@ linters-settings:
     # If it's higher than 0.0 (float) the check is enabled
     # Default: 0.0
     package-average: 10.0
+
+  depguard:
+    # Rules to apply.
+    #
+    # Variables:
+    # - File Variables
+    #   Use an exclamation mark `!` to negate a variable.
+    #   Example: `!$test` matches any file that is not a go test file.
+    #
+    #   `$all` - matches all go files
+    #   `$test` - matches all go test files
+    #
+    # - Package Variables
+    #
+    #   `$gostd` - matches all of go's standard library (Pulled from `GOROOT`)
+    #
+    # Default (applies if no custom rules are defined): Only allow $gostd in all files.
+    rules:
+      # Name of a rule.
+      legacy:
+        # List of packages that are not allowed.
+        # Entries can be a variable (starting with $), a string prefix, or an exact match (if ending with $).
+        # Default: []
+        deny:
+          - pkg: "github.com/golang/protobuf"
+            desc: "Use google.golang.org/protobuf instead, see https://developers.google.com/protocol-buffers/docs/reference/go/faq#modules"
+          - pkg: "github.com/satori/go.uuid"
+            desc: "Use github.com/google/uuid instead, satori's package is not maintained"
+          - pkg: "github.com/gofrs/uuid$"
+            desc: "Use github.com/gofrs/uuid/v5 or later, it was not a go module before v5"
 
   errcheck:
     # Report about not checking of errors in type assertions: `a := b.(MyStruct)`.
@@ -103,24 +136,6 @@ linters-settings:
         # Whether to skip (*x).method() calls where x is a pointer receiver.
         # Default: true
         skipRecvDeref: false
-
-  gomodguard:
-    blocked:
-      # List of blocked modules.
-      # Default: []
-      modules:
-        - github.com/golang/protobuf:
-            recommendations:
-              - google.golang.org/protobuf
-            reason: "see https://developers.google.com/protocol-buffers/docs/reference/go/faq#modules"
-        - github.com/satori/go.uuid:
-            recommendations:
-              - github.com/google/uuid
-            reason: "satori's package is not maintained"
-        - github.com/gofrs/uuid:
-            recommendations:
-              - github.com/gofrs/uuid/v5
-            reason: "gofrs' package was not go module before v5"
 
   govet:
     # Enable all analyzers.
@@ -241,6 +256,7 @@ linters:
     - canonicalheader # checks whether net/http.Header uses canonical header
     - copyloopvar # detects places where loop variables are copied (Go 1.22+)
     - cyclop # checks function and package cyclomatic complexity
+    - depguard # checks if package imports are in a list of acceptable packages
     - dupl # tool for code clone detection
     - durationcheck # checks for two durations multiplied together
     - errname # checks that sentinel errors are prefixed with the Err and error types are suffixed with the Error
@@ -261,7 +277,6 @@ linters:
     - godot # checks if comments end in a period
     - goimports # in addition to fixing imports, goimports also formats your code in the same style as gofmt
     - gomoddirectives # manages the use of 'replace', 'retract', and 'excludes' directives in go.mod
-    - gomodguard # allow and block lists linter for direct Go module dependencies. This is different from depguard where there are different block types for example version constraints and module recommendations
     - goprintffuncname # checks that printf-like functions are named with f at the end
     - gosec # inspects source code for security problems
     - iface # checks the incorrect use of interfaces, helping developers avoid interface pollution
@@ -324,7 +339,6 @@ linters:
     ## disabled
     #- containedctx # detects struct contained context.Context field
     #- contextcheck # [too many false positives] checks the function whether use a non-inherited context
-    #- depguard # [replaced by gomodguard] checks if package imports are in a list of acceptable packages
     #- dogsled # checks assignments with too many blank identifiers (e.g. x, _, _, _, := f())
     #- dupword # [useless without config] checks for duplicate words in the source code
     #- err113 # [too strict] checks the errors handling expressions
@@ -333,6 +347,7 @@ linters:
     #- forcetypeassert # [replaced by errcheck] finds forced type assertions
     #- gofmt # [replaced by goimports] checks whether code was gofmt-ed
     #- gofumpt # [replaced by goimports, gofumports is not available yet] checks whether code was gofumpt-ed
+    #- gomodguard # [use more powerful depguard] allow and block lists linter for direct Go module dependencies
     #- gosmopolitan # reports certain i18n/l10n anti-patterns in your Go codebase
     #- grouper # analyzes expression groups
     #- importas # enforces consistent import aliases
