@@ -1,4 +1,4 @@
-# Golangci-lint Golden Config <br> [![License][license-img]][license-url]
+# Golangci-lint Golden Config
 
 Opinionated [golangci-lint](https://github.com/golangci/golangci-lint) configuration. Intentionally strict (but not draconian) to surface bugs, security issues, and style problems early while avoiding the noisiest checks.
 
@@ -31,8 +31,4 @@ Opinionated [golangci-lint](https://github.com/golangci/golangci-lint) configura
 
 ## License
 
-MIT License. See [LICENSE][license-url] for details.
-
-
-[license-img]: https://img.shields.io/github/license/maratori/golangci-lint-config.svg
-[license-url]: /LICENSE
+MIT License. See [LICENSE](/LICENSE) for details.
