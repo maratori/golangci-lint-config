@@ -2,7 +2,7 @@
 
 Opinionated [golangci-lint](https://github.com/golangci/golangci-lint) configuration. Intentionally strict (but not draconian) to surface bugs, security issues, and style problems early while avoiding the noisiest checks.
 
-> It was originally published as a [gist](https://gist.github.com/maratori/47a4d00457a92aa426dbd48a18776322).
+> It was originally published as a popular [github gist](https://gist.github.com/maratori/47a4d00457a92aa426dbd48a18776322) ![Stars](https://img.shields.io/github/stars/gists/47a4d00457a92aa426dbd48a18776322?label=stars&style=flat-square)
 
 ## Quick Start
 
