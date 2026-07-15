@@ -386,6 +386,9 @@ linters:
       # Optimizes into strings concatenation.
       # Default: true
       strconcat: false
+      # Enable/disable optimization of error formatting.
+      # Default: true
+      error-format: false
 
     reassign:
       # Patterns for global variable names that are checked for reassignment.
