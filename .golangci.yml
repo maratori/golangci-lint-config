@@ -388,7 +388,7 @@ linters:
       strconcat: false
       # Enable/disable optimization of error formatting.
       # Default: true
-      error-format: false
+      error-format: false # https://github.com/catenacyber/perfsprint/issues/62
 
     reassign:
       # Patterns for global variable names that are checked for reassignment.
